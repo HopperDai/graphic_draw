@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 600px;
+            height: 600px;
+            border: 1px solid black;
+            margin: 10px auto;
+        }
+    </style>
+
+    <script src="./echarts.js"></script>
+</head>
+
+<body>
+    <div class="box"></div>
+    <script>
+        const $ = document.querySelectorAll.bind(document);
+
+        let oBox = $('.box')[0]; // 图表容器
+
+        let chart = echarts.init(oBox); // 初始化 echarts 实例 
+
+        let option = { // 图表配置对象
+            title: { // 标题
+                text: 'echarts1',
+                subtext: '副标题',
+                left: 'center',
+                textStyle: {
+                    color: 'red'
+                }
+            }
+        };
+
+        chart.setOption(option); // 使用配置
+    </script>
+</body>
+
+</html>

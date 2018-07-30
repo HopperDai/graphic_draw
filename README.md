@@ -8,6 +8,12 @@
 
   - Raphael
   
-  - echarts 百度
+  - [echarts](http://echarts.baidu.com/) 百度
   
-  - d3 阿里
+  - [d3.js](https://d3js.org/) 阿里
+
+  ## echarts
+
+  - 两个版本：echarts(平面)、GL(3d)
+
+  - 用法：*写配置*
