@@ -35,7 +35,25 @@
                 textStyle: {
                     color: 'red'
                 }
-            }
+            },
+            legend: { // 图例
+                data: ['销量', '评价'],
+                orient: 'vertical',
+                right: 0
+            },
+            xAxis: { // x 轴
+                data: ['上衣', '裤子', '鞋子']
+            },
+            yAxis: {}, // y 轴
+            series: [{ // 系列列表
+                name: '销量',
+                type: 'bar',
+                data: [100, 50, 120]
+            }, {
+                name: '评价',
+                type: 'bar',
+                data: [90, 100, 80]
+            }]
         };
 
         chart.setOption(option); // 使用配置
