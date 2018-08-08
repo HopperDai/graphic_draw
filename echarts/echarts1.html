@@ -48,12 +48,20 @@
             series: [{ // 系列列表
                 name: '销量',
                 type: 'bar',
-                data: [100, 50, 120]
+                data: [100, 50, 120],
+                animationDelay(idx) { // 初始动画延迟。idx: index
+                    // 越往后的数据延迟越大
+                    return idx * 100;
+                }
             }, {
                 name: '评价',
                 type: 'bar',
-                data: [90, 100, 80]
-            }]
+                data: [90, 100, 80],
+                animationDelay(idx) {
+                    return idx * 100;
+                }
+            }],
+            animationEasing: 'elasticOut', // 动画缓冲效果
         };
 
         chart.setOption(option); // 使用配置
