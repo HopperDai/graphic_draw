@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 600px;
+            height: 600px;
+            border: 1px solid black;
+            margin: 10px auto;
+        }
+    </style>
+
+    <script src="../lib/jquery.js"></script>
+    <script src="../lib/echarts.js"></script>
+</head>
+
+<body>
+    <div class="box"></div>
+    <script>
+        function initChart() {
+            return new Promise((resolve, reject) => {
+                let oBox = $('.box')[0]; // 图表容器
+                $.getJSON('../theme/chalk.json', (themeJSON) => { // 获取主题 JSON
+                    echarts.registerTheme('chalk', themeJSON); // 注册
+                    resolve(echarts.init(oBox, 'chalk')); // 初始化实例和加载主题
+                });
+            });
+
+        }
+
+        async function loadChart() {
+            let chart = await initChart();
+
+            let option = {
+                title: {},
+                legend: {},
+                dataset: { // 数据
+                    source: [
+                        ['product', '2015', '2016', '2017', '2018'],
+                        ['a', 100, 200, 250, 400],
+                        ['b', 200, 150, 300, 100],
+                        ['c', 800, 300, 700, 1000],
+                    ]
+                },
+                xAxis: {
+                    type: 'category'
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                // 声明多个 bar ,每个 bar 对应 dataset 的每一列
+                series: [{
+                        type: 'bar'
+                    },
+                    {
+                        type: 'bar'
+                    },
+                    {
+                        type: 'bar'
+                    },
+                    {
+                        type: 'bar'
+                    }
+                ]
+            }
+
+            chart.setOption(option); // 使用配置
+        }
+
+        loadChart();
+    </script>
+</body>
+
+</html>
