@@ -35,7 +35,7 @@
 
         async function loadChart() {
             let chart = await initChart();
-
+            // chart.showLoading(); // loading 效果
             /**
              * 饼图
              * 需要：系列
@@ -70,14 +70,13 @@
                     type: 'pie',
                     radius: '55%',
                     roseType: 'radius',
-                    itemStyle: { // 样式(系列层级)
-                        shadowBlur: 200,
-                        shadowOffsetX: 0,
-                        shadowOffsetY: 0,
-                        shadowColor: 'rgba(0,0,0,.5)',
-                        emphasis: {
-                            shadowBlur: 200,
-                            shadowColor: 'rgba(0,0,0,.5)'
+                    emphasis: { // 高亮样式
+                        itemStyle: {
+                            color: 'blue' // 高亮时点的颜色
+                        },
+                        label: { // 高亮时标签的文字
+                            show: true,
+                            formatter: 'This is a emphasis label'
                         }
                     },
                     data: [{
