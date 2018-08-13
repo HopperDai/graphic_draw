@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 800px;
+            height: 600px;
+            border: 1px solid black;
+            margin: 10px auto;
+        }
+    </style>
+
+    <script src="../lib/jquery.js"></script>
+    <script src="../lib/echarts.js"></script>
+</head>
+
+<body>
+    <div class="box"></div>
+    <script>
+        function initChart() {
+            return new Promise((resolve, reject) => {
+                let oBox = $('.box')[0]; // 图表容器
+                $.getJSON('../theme/chalk.json', (themeJSON) => { // 获取主题 JSON
+                    echarts.registerTheme('chalk', themeJSON); // 注册
+                    resolve(echarts.init(oBox, 'chalk')); // 初始化实例和加载主题
+                });
+            });
+
+        }
+
+        async function loadChart() {
+            let chart = await initChart();
+
+            var option = {
+                dataset: {
+                    source: [
+                        ['score', 'amount', 'product'],
+                        [89.3, 58212, 'Matcha Latte'],
+                        [57.1, 78254, 'Milk Tea'],
+                        [74.4, 41032, 'Cheese Cocoa'],
+                        [50.1, 12755, 'Cheese Brownie'],
+                        [89.7, 20145, 'Matcha Cocoa'],
+                        [68.1, 79146, 'Tea'],
+                        [19.6, 91852, 'Orange Juice'],
+                        [10.6, 101852, 'Lemon Juice'],
+                        [32.7, 20112, 'Walnut Brownie']
+                    ]
+                },
+                xAxis: {},
+                yAxis: {
+                    type: 'category'
+                },
+                series: [{
+                    type: 'bar',
+                    encode: {
+                        // 将 "amount" 列映射到 X 轴。
+                        x: 'amount',
+                        // 将 "product" 列映射到 Y 轴。
+                        y: 'product'
+                    }
+                }]
+            };
+
+            chart.setOption(option); // 使用配置
+        }
+
+        loadChart();
+    </script>
+</body>
+
+</html>
