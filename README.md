@@ -7,13 +7,25 @@
 - 库
 
   - Raphael
-  
+
   - [echarts](http://echarts.baidu.com/) 百度
-  
+
   - [d3.js](https://d3js.org/) 阿里
+
+    - 下载
+
+      - 从官网下载
+
+      - `bower i d3`
+
+    - 使用 d3 主要操作两件事
+
+      - 计算
+
+      - 生成
 
   ## echarts
 
   - 两个版本：echarts(平面)、GL(3d)
 
-  - 用法：*写配置*
+  - 用法：_写配置_
