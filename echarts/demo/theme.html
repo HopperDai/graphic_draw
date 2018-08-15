@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 600px;
+            height: 600px;
+            border: 1px solid black;
+            margin: 10px auto;
+        }
+    </style>
+
+    <script src="../lib/jquery.js"></script>
+    <script src="../lib/echarts.js"></script>
+</head>
+
+<body>
+    <div class="box"></div>
+    <script>
+        function initChart() {
+            return new Promise((resolve, reject) => {
+                let oBox = $('.box')[0]; // 图表容器
+                $.getJSON('../theme/chalk.json', (themeJSON) => { // 获取主题 JSON
+                    echarts.registerTheme('chalk', themeJSON); // 注册
+                    resolve(echarts.init(oBox, 'chalk')); // 初始化实例和加载主题
+                });
+            });
+
+        }
+
+        async function loadChart() {
+            let chart = await initChart();
+
+            /**
+             * 饼图
+             * 需要：系列
+             * 通过扇形的弧度表现不同类目的数据在总和中的占比
+             */
+            let option = { // 图表配置对象
+                label: {
+                    labelLine: { // 标签引导线样式
+                        lineStyel: {
+                            color: 'rgba(255, 255, 255, 0.3)'
+                        }
+                    }
+                },
+                title: { // 标题
+                    text: 'pie',
+                    subtext: '副标题',
+                    left: 'center',
+                    textStyle: {
+                        color: 'red'
+                    }
+                },
+                legend: { // 图例
+                    data: ['访问来源'],
+                    orient: 'vertical',
+                    right: 0,
+                    textStyle: {
+                        color: 'white'
+                    }
+                },
+                series: [{
+                    name: '访问来源',
+                    type: 'pie',
+                    radius: '55%',
+                    roseType: 'radius',
+                    itemStyle: { // 样式(系列层级)
+                        shadowBlur: 200,
+                        shadowOffsetX: 0,
+                        shadowOffsetY: 0,
+                        shadowColor: 'rgba(0,0,0,.5)',
+                        emphasis: {
+                            shadowBlur: 200,
+                            shadowColor: 'rgba(0,0,0,.5)'
+                        }
+                    },
+                    data: [{
+                            value: 235,
+                            name: '视频广告'
+                        },
+                        {
+                            value: 274,
+                            name: '联盟广告'
+                        },
+                        {
+                            value: 310,
+                            name: '邮件营销'
+                        },
+                        {
+                            value: 335,
+                            name: '直接访问'
+                        },
+                        {
+                            value: 400,
+                            name: '搜索引擎'
+                        }
+                    ]
+                }]
+            };
+            chart.setOption(option); // 使用配置
+        }
+
+        loadChart();
+    </script>
+</body>
+
+</html>
