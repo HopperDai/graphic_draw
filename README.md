@@ -28,4 +28,35 @@
 
   - 两个版本：echarts(平面)、GL(3d)
 
+  - 基础用法：
+
+    - 通过 `echarts` 初始化表格
+
+    - 定义表格的 **option**
+
+    - 设置 `option`
+
+    ```javascript
+    // TODO demo：双饼图（radius、center）、环饼图（radius数组）、环饼图和饼图连在一起
+    
+    const chart = echarts.init(容器元素);
+
+    let option = { // 详细配置需查看官网
+      title, // 标题
+      xAxis, // 柱状图
+      yAxis, // 柱状图
+      series:[ // 数据
+        {
+          name: '该系列数据的名字',
+          type: 'bar/pie/radar',
+          data: [
+            {name: '该项数据的名字', value: '数据'}
+          ]
+        }
+      ],
+    }
+
+    chart.setOption(option);
+    ```
+
   - 用法：_写配置_
