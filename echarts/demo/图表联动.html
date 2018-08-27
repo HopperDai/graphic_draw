@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 600px;
+            height: 600px;
+            border: 1px solid black;
+            margin: 10px auto;
+        }
+    </style>
+
+    <script src="../lib/echarts.js"></script>
+</head>
+
+<body>
+    <div class="box box1"></div>
+    <div class="box box2"></div>
+    <script>
+        const $ = document.querySelectorAll.bind(document);
+
+        let oBox1 = $('.box1')[0]; // 图表容器
+        let oBox2 = $('.box2')[0]; // 图表容器
+
+        let chart1 = echarts.init(oBox1); // 初始化 echarts 实例 
+        let chart2 = echarts.init(oBox2); // 初始化 echarts 实例 
+        const data = [{
+            name: 'A',
+            value: 120,
+            children: [{
+                    name: 'a1',
+                    value: 10
+                },
+                {
+                    name: 'a2',
+                    value: 30
+                },
+                {
+                    name: 'a3',
+                    value: 15
+                },
+            ]
+        }, {
+            name: 'B',
+            value: 120,
+            children: [{
+                    name: 'b1',
+                    value: 12
+                },
+                {
+                    name: 'b2',
+                    value: 38
+                },
+                {
+                    name: 'b3',
+                    value: 13
+                },
+            ]
+        }, {
+            name: 'C',
+            value: 120,
+            children: [{
+                    name: 'c1',
+                    value: 15
+                },
+                {
+                    name: 'c2',
+                    value: 22
+                },
+                {
+                    name: 'c3',
+                    value: 19
+                },
+            ]
+        }]
+
+        let option = {
+            title: { // 标题
+                text: '父级',
+            },
+            series: [{
+                name: '父级数据',
+                type: 'pie',
+                radius: '25%',
+                center: ['25%', '50%'],
+                data: data.map(item => ({
+                    name: item.name,
+                    value: item.value
+                }))
+            }]
+        };
+
+        chart1.setOption(option); // 使用配置
+        chart1.on('click', (params) => {
+            const d = data.filter(item => item.name === params.name)[0].children;
+            let option = {
+                title: {
+                    text: `${params.name} 子元素`
+                },
+                xAxis: {
+                    data: d.map(item => item.name),
+                },
+                yAxis: {},
+                series: [{
+                    name: '子级数据',
+                    type: 'bar',
+                    data: d.map(item => ({
+                        name: item.name,
+                        value: item.value
+                    }))
+                }]
+            }
+            chart2.setOption(option);
+        });
+    </script>
+</body>
+
+</html>

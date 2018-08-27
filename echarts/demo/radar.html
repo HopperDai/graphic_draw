@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 600px;
+            height: 600px;
+            border: 1px solid black;
+            margin: 10px auto;
+        }
+    </style>
+
+    <script src="../lib/echarts.js"></script>
+</head>
+
+<body>
+    <div class="box"></div>
+    <script>
+        const $ = document.querySelectorAll.bind(document);
+
+        let oBox = $('.box')[0]; // 图表容器
+
+        let chart = echarts.init(oBox); // 初始化 echarts 实例 
+
+        let option = {
+            title: { // 标题
+                text: '雷达图',
+                subtext: '副标题',
+                left: 'center',
+                textStyle: {
+                    color: 'red'
+                }
+            },
+            legend: {
+                data: ['预算金额', '实际开销']
+            },
+            radar: {
+                indicator: [{
+                        name: 'a1',
+                        max: 1000
+                    },
+                    {
+                        name: 'a2',
+                        max: 200
+                    },
+                    {
+                        name: 'a3',
+                        max: 350
+                    },
+                    {
+                        name: 'a4',
+                        max: 460
+                    },
+                    {
+                        name: 'a5',
+                        max: 800
+                    },
+                    {
+                        name: 'a6',
+                        max: 1000
+                    }
+                ]
+            },
+            series: [{
+                name: '预算 vs 实际',
+                type: 'radar',
+                data: [{
+                    name: '预算金额',
+                    value: [200, 100, 300, 350, 600, 800]
+                }, {
+                    name: '实际开销',
+                    value: [190, 110, 230, 300, 620, 760]
+                }]
+            }]
+        };
+
+        chart.setOption(option); // 使用配置
+    </script>
+</body>
+
+</html>
