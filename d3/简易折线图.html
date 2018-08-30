@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/d3.js"></script>
+</head>
+
+<body>
+    <script>
+        const data = [{
+                name: '1月',
+                value: 3000
+            },
+            {
+                name: '2月',
+                value: 3902
+            },
+            {
+                name: '3月',
+                value: 1250
+            },
+            {
+                name: '4月',
+                value: 3609
+            },
+            {
+                name: '5月',
+                value: 2592
+            },
+            {
+                name: '6月',
+                value: 3567
+            }
+        ];
+        // 1. 计算数据
+        // 1.1 创建生成器
+        let lineGen = d3.line()
+            .x((item, index) => {
+                // x 轴间的值只有 1 像素，也需要做处理
+                return index === 0 ? 10 : (parseInt(item.name) - 1) * (780 / (data.length - 1)); // 返回每个点距离最左边的像素值
+            })
+            .y(item => (600 - item.value / 10)); // 电脑屏幕 600 左右，数据值太大，需要做处理; 数据越大，越往下，会有种倒过来的效果，需要做处理
+        // 1.2 拿生成器计算数据
+        let lineRes = lineGen(data);
+        console.log(lineRes);
+        // 2. 创建图形显示数据 
+        d3.select('body')
+            .append('svg')
+            .attr('width', 800) // 注：设置属性只能每个调用一次 attr 方法
+            .attr('height', 600)
+            .attr('style', 'border: 1px solid red')
+            .append('path')
+            .attr('d', lineRes)
+            .attr('stroke', 'black')
+            .attr('fill', 'none')
+
+        // 类似 echarts 的坐标轴等效果需要自己手写实现
+    </script>
+</body>
+
+</html>

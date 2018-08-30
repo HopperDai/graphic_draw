@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/d3.js"></script>
+</head>
+
+<body>
+    <script>
+        d3.select('body')
+            .append('svg')
+            .attr('width', 800) // 注：设置属性只能每个调用一次 attr 方法
+            .attr('height', 600)
+            .attr('style', 'border: 1px solid red')
+            .append('path')
+            .attr('d', 'M 100,100 L 300,200 200,100')
+            .attr('stroke', 'black')
+            .attr('fill', 'none')
+    </script>
+</body>
+
+</html>
